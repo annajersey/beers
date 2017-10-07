@@ -1,0 +1,85 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans:beans xmlns="http://www.springframework.org/schema/mvc"-->
+	<!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"-->
+	<!--xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"-->
+	<!--xmlns:jpa="http://www.springframework.org/schema/data/jpa"-->
+    <!--xmlns:mvc="http://www.springframework.org/schema/mvc"-->
+	<!--xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd-->
+		<!--http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd-->
+		<!--http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd-->
+		<!--http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd-->
+        <!--http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd-->
+        <!--http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd-->
+<!--">-->
+
+	<!--&lt;!&ndash; DispatcherServlet Context: defines this servlet's request-processing -->
+		<!--infrastructure &ndash;&gt;-->
+
+	<!--&lt;!&ndash; Enables the Spring MVC @Controller programming model &ndash;&gt;-->
+	<!--<annotation-driven />-->
+    <!--<mvc:annotation-driven />-->
+	<!--&lt;!&ndash; Handles HTTP GET requests for /resources/** by efficiently serving -->
+		<!--up static resources in the ${webappRoot}/resources directory &ndash;&gt;-->
+	<!--<resources mapping="/resources/**" location="/resources/" />-->
+
+	<!--&lt;!&ndash; Resolves views selected for rendering by @Controllers to .jsp resources -->
+		<!--in the /WEB-INF/views directory &ndash;&gt;-->
+	<!--<beans:bean-->
+		<!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+		<!--<beans:property name="prefix" value="/WEB-INF/views/" />-->
+		<!--<beans:property name="suffix" value=".jsp" />-->
+	<!--</beans:bean>-->
+
+	<!--<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"-->
+		<!--destroy-method="close">-->
+		<!--<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
+		<!--<beans:property name="url"-->
+			<!--value="jdbc:mysql://localhost:3306/horn_beers" />-->
+		<!--<beans:property name="username" value="root" />-->
+		<!--<beans:property name="password" value="freshline" />-->
+	<!--</beans:bean>-->
+
+	<!--&lt;!&ndash; Hibernate 4 SessionFactory Bean definition &ndash;&gt;-->
+	<!--&lt;!&ndash;<beans:bean id="hibernate4AnnotatedSessionFactory"&ndash;&gt;-->
+		<!--&lt;!&ndash;class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">&ndash;&gt;-->
+		<!--&lt;!&ndash;<beans:property name="dataSource" ref="dataSource" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<beans:property name="annotatedClasses">&ndash;&gt;-->
+			<!--&lt;!&ndash;<beans:list>&ndash;&gt;-->
+				<!--&lt;!&ndash;<beans:value>my.beerproject.model.Beer</beans:value>&ndash;&gt;-->
+			<!--&lt;!&ndash;</beans:list>&ndash;&gt;-->
+		<!--&lt;!&ndash;</beans:property>&ndash;&gt;-->
+		<!--&lt;!&ndash;<beans:property name="hibernateProperties">&ndash;&gt;-->
+			<!--&lt;!&ndash;<beans:props>&ndash;&gt;-->
+				<!--&lt;!&ndash;<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect&ndash;&gt;-->
+				<!--&lt;!&ndash;</beans:prop>&ndash;&gt;-->
+				<!--&lt;!&ndash;<beans:prop key="hibernate.show_sql">true</beans:prop>&ndash;&gt;-->
+			<!--&lt;!&ndash;</beans:props>&ndash;&gt;-->
+		<!--&lt;!&ndash;</beans:property>&ndash;&gt;-->
+	<!--&lt;!&ndash;</beans:bean>&ndash;&gt;-->
+	<!---->
+	<!--<beans:bean id="beerDAO" class="my.beerproject.dao.BeerDAOImpl">-->
+
+	<!--</beans:bean>-->
+
+	<!--<beans:bean id="beerService" class="my.beerproject.service.BeerServiceImpl">-->
+
+	<!--</beans:bean>-->
+
+	<!--<context:component-scan base-package="my.beerproject" />-->
+	<!---->
+	<!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+
+	<!--<beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
+		<!--<beans:property name="entityManagerFactory" ref="entityManagerFactory" />-->
+	<!--</beans:bean>-->
+    <!--<beans:bean id="entityManagerFactory"-->
+          <!--class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
+        <!--<beans:property name="packagesToScan" value="my.beerproject" />-->
+        <!--<beans:property name="dataSource" ref="dataSource" />-->
+        <!--<beans:property name="persistenceProvider">-->
+           <!--<beans:bean class="org.hibernate.jpa.HibernatePersistenceProvider"></beans:bean>-->
+        <!--</beans:property>-->
+   <!--</beans:bean>-->
+<!--</beans:beans>-->
+
