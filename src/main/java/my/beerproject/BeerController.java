@@ -40,13 +40,13 @@ public class BeerController {
     }
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String listBeers(Model model) {
-        System.out.println("test");
+        //System.out.println("test");
 
         model.addAttribute("beer", new Beer());
         model.addAttribute("listBeers", this.beerService.listBeers());
-        for(Beer p : this.beerService.listBeers()){
-            System.out.println(p);
-        }
+       // for(Beer p : this.beerService.listBeers()){
+       //     System.out.println(p);
+       // }
         return "beers";
     }
 

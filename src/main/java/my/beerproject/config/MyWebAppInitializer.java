@@ -14,8 +14,6 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext context
                 = new AnnotationConfigWebApplicationContext();
         context.register(DispatcherConfig.class);
-        //context.setConfigLocation("/WEB-INF/spring/appServlet/servlet-context.xml");
-        //context.setConfigLocation("my.beerproject.config");
 
         container.addListener(new ContextLoaderListener(context));
         ServletRegistration.Dynamic dispatcher = container

@@ -76,9 +76,10 @@
 <c:if test="${!empty listBeers}">
 	<table class="tg">
 	<tr>
-		<th width="80"> ID</th>
-		<th width="120"> Name</th>
-		<th width="120"> Sub Name</th>
+		<th > ID</th>
+		<th> Name</th>
+		<th > Sub Name</th>
+		<th > Hops</th>
 		<th > </th>
 		<th > </th>
 	</tr>
@@ -87,6 +88,11 @@
 			<td>${beer.beerId}</td>
 			<td>${beer.beerName}</td>
 			<td>${beer.beerSubName}</td>
+			<td>
+				<c:forEach items="${beer.hops}" var="hop">
+					${hop.hop_name},
+				</c:forEach>
+			</td>
 			<td><a href="<c:url value='/edit/${beer.beerId}' />" >Edit</a></td>
 			<td><a href="<c:url value='/remove/${beer.beerId}' />" >Delete</a></td>
 		</tr>

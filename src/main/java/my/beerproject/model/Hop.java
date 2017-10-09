@@ -1,6 +1,7 @@
 package my.beerproject.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,13 +21,13 @@ public class Hop {
           name="beer_to_hop",
           joinColumns = { @JoinColumn(name = "beer_id") },
           inverseJoinColumns = { @JoinColumn(name = "hop_id") })
-  private Set beers;
+  private List beers;
 
-  public Set getBeers() {
+  public List getBeers() {
     return beers;
   }
 
-  public void setBeers(Set beers) {
+  public void setBeers(List beers) {
     this.beers = beers;
   }
 

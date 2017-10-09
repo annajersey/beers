@@ -50,8 +50,8 @@ public class BeerServiceImpl implements BeerService {
 
     @Transactional
     public List<Beer> getBeerByName(String beerName) {
-        System.out.println(beerName);
-        System.out.println(this.BeerJpa.findByBeerName(beerName));
+        //System.out.println(beerName);
+        //System.out.println(this.BeerJpa.findByBeerName(beerName));
         return this.BeerJpa.findByBeerName(beerName);
     }
     @Transactional

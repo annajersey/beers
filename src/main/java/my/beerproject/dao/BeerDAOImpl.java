@@ -2,6 +2,7 @@ package my.beerproject.dao;
 
 
 import my.beerproject.model.Beer;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -47,9 +48,10 @@ public class BeerDAOImpl implements BeerDAO {
     public List<Beer> listBeers() {
         //Session session = this.sessionFactory.getCurrentSession();
         List<Beer> beerList = entityManager.createQuery("from Beer").getResultList();
-        for(Beer p : beerList){
-            System.out.println(p);
-        }
+        //Hibernate.initialize(p.getHops());
+        //for(Beer p : beerList){
+       //     System.out.println(p);
+       // }
         return beerList;
     }
 
@@ -58,7 +60,9 @@ public class BeerDAOImpl implements BeerDAO {
         //Session session = this.sessionFactory.getCurrentSession();
         //Beer p = (Beer) session.load(Beer.class, new Integer(id));
         Beer p = entityManager.find(Beer.class, id);
-        System.out.println(p);
+
+        System.out.println(p.getHops());
+       // System.out.println(p);
         //logger.info("Person loaded successfully, Person details="+p);
         return p;
     }
@@ -72,7 +76,7 @@ public class BeerDAOImpl implements BeerDAO {
         //}
        // logger.info("Person deleted successfully, person details="+p);
         Beer p = entityManager.find(Beer.class, id);
-        System.out.println(p.getHops());
+
         entityManager.remove(p);
         entityManager.flush();
     }

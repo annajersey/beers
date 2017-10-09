@@ -1,6 +1,7 @@
 package my.beerproject.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -261,20 +262,21 @@ public class Beer {
         this.beerSubName = beerSubName;
     }
 
-    public Set getHops() {
+    public List getHops() {
         return hops;
     }
 
-    public void setHops(Set hops) {
+    public void setHops(List hops) {
         this.hops = hops;
     }
 
-    @ManyToMany(targetEntity=Hop.class)
+
+    @ManyToMany(targetEntity=Hop.class,fetch = FetchType.EAGER)
     @JoinTable(
             name="beer_to_hop",
             joinColumns = { @JoinColumn(name = "beer_id") },
             inverseJoinColumns = { @JoinColumn(name = "hop_id") })
-    private Set hops;
+    private List hops;
 
     @Override
     public String toString(){
