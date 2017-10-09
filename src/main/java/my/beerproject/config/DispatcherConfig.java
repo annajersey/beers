@@ -60,7 +60,7 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/horn_beers");
         dataSource.setUsername("root");
-        dataSource.setPassword("freshline");
+        dataSource.setPassword("root");
 
         return dataSource;
     }

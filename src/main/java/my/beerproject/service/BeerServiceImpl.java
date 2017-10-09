@@ -21,7 +21,8 @@ public class BeerServiceImpl implements BeerService {
 
     @Transactional
     public void addBeer(Beer p) {
-        this.beerDAO.addBeer(p);
+        BeerJpa.saveAndFlush(p);
+        //this.beerDAO.addBeer(p);
     }
 
 

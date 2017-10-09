@@ -80,6 +80,7 @@
 		<th> Name</th>
 		<th > Sub Name</th>
 		<th > Hops</th>
+		<th > Malt</th>
 		<th > </th>
 		<th > </th>
 	</tr>
@@ -92,6 +93,9 @@
 				<c:forEach items="${beer.hops}" var="hop">
 					${hop.hop_name},
 				</c:forEach>
+			</td>
+			<td>
+				${beer.getMaltsString()}
 			</td>
 			<td><a href="<c:url value='/edit/${beer.beerId}' />" >Edit</a></td>
 			<td><a href="<c:url value='/remove/${beer.beerId}' />" >Delete</a></td>

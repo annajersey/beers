@@ -16,20 +16,20 @@ public class Hop {
   private String hop_alias;
   private Long not_hop;
 
-  @ManyToMany(targetEntity = Beer.class)
-  @JoinTable(
-          name="beer_to_hop",
-          joinColumns = { @JoinColumn(name = "beer_id") },
-          inverseJoinColumns = { @JoinColumn(name = "hop_id") })
-  private List beers;
+ // @ManyToMany(targetEntity = Beer.class)
+//  @JoinTable(
+//          name="beer_to_hop",
+//          joinColumns = { @JoinColumn(name = "beer_id") },
+//          inverseJoinColumns = { @JoinColumn(name = "hop_id") })
+ // private List beers;
 
-  public List getBeers() {
-    return beers;
-  }
+ // public List getBeers() {
+    //return beers;
+  //}
 
-  public void setBeers(List beers) {
-    this.beers = beers;
-  }
+ // public void setBeers(List beers) {
+   // this.beers = beers;
+ // }
 
   public Long getHop_id() {
     return hop_id;

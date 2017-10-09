@@ -1,6 +1,7 @@
 package my.beerproject.model;
 
 import javax.persistence.*;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -46,6 +47,9 @@ public class Beer {
     private String beerCollaboration="";
 
     private Double basics_volume=0.0;
+
+    public Beer() {
+    }
 
     public String getBeerSince() {
         return beerSince;
@@ -277,6 +281,33 @@ public class Beer {
             joinColumns = { @JoinColumn(name = "beer_id") },
             inverseJoinColumns = { @JoinColumn(name = "hop_id") })
     private List hops;
+
+    public List getMalts() {
+        return malts;
+    }
+    public StringBuilder getMaltsString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Iterator<Malt> it = this.malts.iterator(); it.hasNext(); ) {
+            sb.append(it.next().getMaltName());
+            if (it.hasNext()) {
+                sb.append(",");
+            }
+        }
+        return sb;
+    }
+    public void setMalts(List malts) {
+        this.malts = malts;
+    }
+
+    @ManyToMany(targetEntity = Malt.class,fetch=FetchType.EAGER)
+    @JoinTable(
+            name="beer_to_malt",
+            joinColumns = {@JoinColumn(name="beer_id")},
+            inverseJoinColumns = {@JoinColumn(name="malt_id")}
+    )
+    private List<Malt> malts;
+
 
     @Override
     public String toString(){
