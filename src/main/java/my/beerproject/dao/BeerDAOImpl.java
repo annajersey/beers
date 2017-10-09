@@ -72,6 +72,7 @@ public class BeerDAOImpl implements BeerDAO {
         //}
        // logger.info("Person deleted successfully, person details="+p);
         Beer p = entityManager.find(Beer.class, id);
+        System.out.println(p.getHops());
         entityManager.remove(p);
         entityManager.flush();
     }

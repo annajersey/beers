@@ -1,6 +1,7 @@
 package my.beerproject.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Entity bean with JPA annotations
@@ -259,6 +260,21 @@ public class Beer {
     public void setBeerSubName(String beerSubName) {
         this.beerSubName = beerSubName;
     }
+
+    public Set getHops() {
+        return hops;
+    }
+
+    public void setHops(Set hops) {
+        this.hops = hops;
+    }
+
+    @ManyToMany(targetEntity=Hop.class)
+    @JoinTable(
+            name="beer_to_hop",
+            joinColumns = { @JoinColumn(name = "beer_id") },
+            inverseJoinColumns = { @JoinColumn(name = "hop_id") })
+    private Set hops;
 
     @Override
     public String toString(){

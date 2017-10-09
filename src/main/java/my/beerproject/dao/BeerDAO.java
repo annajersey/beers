@@ -3,10 +3,7 @@ package my.beerproject.dao;
 
 
 import my.beerproject.model.Beer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import my.beerproject.model.Hop;
 
 import java.util.List;
 

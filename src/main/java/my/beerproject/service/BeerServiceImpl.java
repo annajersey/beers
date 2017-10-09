@@ -19,11 +19,6 @@ public class BeerServiceImpl implements BeerService {
   @Autowired
   private BeerJpa BeerJpa;
 
-    public void setBeerDAO(BeerDAO beerDAO) {
-        this.beerDAO = beerDAO;
-    }
-
-
     @Transactional
     public void addBeer(Beer p) {
         this.beerDAO.addBeer(p);
