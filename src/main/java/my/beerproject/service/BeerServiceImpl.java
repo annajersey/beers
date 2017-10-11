@@ -64,8 +64,8 @@ public class BeerServiceImpl implements BeerService {
         return this.BeerJpa.findByBeerNameLikeIgnoreCase("%"+beerName+"%");
     }
 
-    public List<Beer> searchBeers(String malts, String hops, String yeasts){
-        return this.beerDAO.searchBeersSimple(malts,hops,yeasts);
+    public List<Beer> searchBeers(String malts, String hops, String yeasts,String search){
+        return this.beerDAO.searchBeersSimple(malts,hops,yeasts, search);
     }
 
 

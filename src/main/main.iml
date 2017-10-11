@@ -38,5 +38,6 @@
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.2.11.Final" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:1.7.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
   </component>
 </module>

@@ -18,5 +18,5 @@ public interface BeerService {
 
     List<Beer> findByBeerNameIsOrBeerSubNameEquals(String name, String subName);
     List<Beer>  findByBeerNameLikeOrderByBeerNameAsc(String s);
-    List<Beer> searchBeers(String malts, String hops, String yeasts);
+    List<Beer> searchBeers(String malts, String hops, String yeasts,String search);
 }

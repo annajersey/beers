@@ -5,10 +5,7 @@ import my.beerproject.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,9 +35,13 @@ public class JsonController {
         return beers;
     }
 
-    @RequestMapping(value="search/{malts}/{hops}/{yeasts}")
-    public @ResponseBody List<Beer> searchBeers(@PathVariable String malts,@PathVariable String hops,@PathVariable String yeasts){
-        List<Beer> beers = this.beerService.searchBeers(malts,hops,yeasts);
+    @RequestMapping(value="search")
+    public @ResponseBody List<Beer> searchBeers(
+            @RequestParam(required = false) String malts,
+            @RequestParam( required = false) String hops,
+            @RequestParam( required = false) String yeasts,
+            @RequestParam( required = false) String search){
+        List<Beer> beers = this.beerService.searchBeers(malts,hops,yeasts,search);
         return beers;
     }
 }

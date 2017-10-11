@@ -14,5 +14,5 @@ public interface BeerDAO{
     public List<Beer> listBeers();
     public Beer getBeerById(int id);
     public void removeBeer(int id);
-    public List<Beer> searchBeersSimple(String malts,String hops,String yeasts);
+    public List<Beer> searchBeersSimple(String malts,String hops,String yeasts,String search);
 }

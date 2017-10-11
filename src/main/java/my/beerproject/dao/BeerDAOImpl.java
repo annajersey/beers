@@ -83,11 +83,20 @@ public class BeerDAOImpl implements BeerDAO {
         entityManager.remove(p);
         entityManager.flush();
     }
-    public List<Beer> searchBeersSimple(String malts,String hops,String yeasts) {
+    public List<Beer> searchBeersSimple(String malts,String hops,String yeasts,String search) {
+        System.out.println(search);
         StringBuilder filters = new StringBuilder();
-        if(!malts.isEmpty()) filters.append("AND b2m.malt_id IN (:malts) ");
-        if(!hops.isEmpty()) filters.append("AND b2h.hop_id IN (:hops) ");
-        if(!yeasts.isEmpty()) filters.append("AND b2y.yeast_id IN (:yeasts) ");
+        if(search != null && !search.isEmpty()) filters.append(" AND (b.beer_name LIKE :search OR "+
+        "b.beer_subname LIKE :search OR "+
+        "b.beer_title LIKE :search OR "+
+        "b.beer_subtitle LIKE :search OR "+
+        "b.beer_description LIKE :search OR "+
+        "b.food_parings LIKE :search OR "+
+        "b.beer_tips LIKE :search)");
+
+        if(malts != null && !malts.isEmpty()) filters.append("AND b2m.malt_id IN (:malts) ");
+        if(hops != null && !hops.isEmpty()) filters.append("AND b2h.hop_id IN (:hops) ");
+        if(yeasts != null && !yeasts.isEmpty()) filters.append("AND b2y.yeast_id IN (:yeasts) ");
 
         String query = "SELECT b.beer_id, (100*(COUNT(DISTINCT b2m.malt_id) + COUNT(DISTINCT b2h.hop_id))/ " +
                 "(COUNT(DISTINCT b2h2.hop_id) + COUNT(DISTINCT b2m2.malt_id))" +
@@ -100,9 +109,10 @@ public class BeerDAOImpl implements BeerDAO {
                 "WHERE 1=1  "+filters+
         " GROUP BY b.beer_id ORDER BY points DESC, b.brand_id ASC ";
         Query q = entityManager.createNativeQuery(query);
-        if(!malts.isEmpty()) q.setParameter("malts", malts);
-        if(!hops.isEmpty())  q.setParameter("hops",hops);
-        if(!yeasts.isEmpty())  q.setParameter("yeasts", yeasts);
+        if(malts != null && !malts.isEmpty()) q.setParameter("malts", malts);
+        if(hops != null && !hops.isEmpty())  q.setParameter("hops",hops);
+        if(yeasts != null && !yeasts.isEmpty())  q.setParameter("yeasts", yeasts);
+        if(search != null && !search.isEmpty())  q.setParameter("search", '%'+search+'%');
 
         List<Object[]> result = q.getResultList();
         List<Beer> beers = new ArrayList<Beer>();
