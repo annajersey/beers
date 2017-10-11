@@ -37,4 +37,10 @@ public class JsonController {
         List<Beer> beers = this.beerService.findByBeerNameLikeOrderByBeerNameAsc(name);
         return beers;
     }
+
+    @RequestMapping(value="search/{malts}/{hops}/{yeasts}")
+    public @ResponseBody List<Beer> searchBeers(@PathVariable String malts,@PathVariable String hops,@PathVariable String yeasts){
+        List<Beer> beers = this.beerService.searchBeers(malts,hops,yeasts);
+        return beers;
+    }
 }

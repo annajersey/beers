@@ -2,6 +2,7 @@ package my.beerproject.service;
 
 
 import my.beerproject.model.Beer;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -17,4 +18,5 @@ public interface BeerService {
 
     List<Beer> findByBeerNameIsOrBeerSubNameEquals(String name, String subName);
     List<Beer>  findByBeerNameLikeOrderByBeerNameAsc(String s);
+    List<Beer> searchBeers(String malts, String hops, String yeasts);
 }

@@ -1,6 +1,7 @@
 package my.beerproject.dao;
 
 
+
 import my.beerproject.model.Beer;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -79,6 +82,34 @@ public class BeerDAOImpl implements BeerDAO {
 
         entityManager.remove(p);
         entityManager.flush();
+    }
+    public List<Beer> searchBeersSimple(String malts,String hops,String yeasts) {
+        StringBuilder filters = new StringBuilder();
+        if(!malts.isEmpty()) filters.append("AND b2m.malt_id IN (:malts) ");
+        if(!hops.isEmpty()) filters.append("AND b2h.hop_id IN (:hops) ");
+        if(!yeasts.isEmpty()) filters.append("AND b2y.yeast_id IN (:yeasts) ");
+
+        String query = "SELECT b.beer_id, (100*(COUNT(DISTINCT b2m.malt_id) + COUNT(DISTINCT b2h.hop_id))/ " +
+                "(COUNT(DISTINCT b2h2.hop_id) + COUNT(DISTINCT b2m2.malt_id))" +
+                ") points FROM beers as b " +
+                "LEFT JOIN beer_to_hop b2h ON b.beer_id=b2h.beer_id " +
+                "LEFT JOIN beer_to_malt b2m ON b.beer_id=b2m.beer_id " +
+                "LEFT JOIN beer_to_hop b2h2 ON b.beer_id=b2h2.beer_id " +
+                "LEFT JOIN beer_to_malt b2m2 ON b.beer_id=b2m2.beer_id " +
+                "LEFT JOIN beer_to_yeast b2y ON b.beer_id=b2y.beer_id " +
+                "WHERE 1=1  "+filters+
+        " GROUP BY b.beer_id ORDER BY points DESC, b.brand_id ASC ";
+        Query q = entityManager.createNativeQuery(query);
+        if(!malts.isEmpty()) q.setParameter("malts", malts);
+        if(!hops.isEmpty())  q.setParameter("hops",hops);
+        if(!yeasts.isEmpty())  q.setParameter("yeasts", yeasts);
+
+        List<Object[]> result = q.getResultList();
+        List<Beer> beers = new ArrayList<Beer>();
+        for (Object[] a : result) {
+           beers.add(this.getBeerById((Integer) a[0]));
+        }
+        return beers;
     }
 
 
