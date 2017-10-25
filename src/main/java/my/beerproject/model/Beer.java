@@ -1,5 +1,7 @@
 package my.beerproject.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Iterator;
 import java.util.List;
@@ -16,9 +18,10 @@ public class Beer {
 
     @Id
     @Column(name="beer_id")
+    @JsonProperty("id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int beerId;
-
+    @JsonProperty("name")
     @Column(name="beer_name")
     private String beerName;
 

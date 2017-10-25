@@ -15,6 +15,8 @@
 	</style>
 </head>
 <body>
+
+
 <h1>
 	Add a Beer
 </h1>
@@ -91,7 +93,7 @@
 			<td>${beer.beerSubName}</td>
 			<td>
 				<c:forEach items="${beer.hops}" var="hop">
-					${hop.hop_name},
+					${hop.hopName},
 				</c:forEach>
 			</td>
 			<td>

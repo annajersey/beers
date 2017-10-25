@@ -1,8 +1,8 @@
 package my.beerproject.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name="hops")
@@ -10,9 +10,12 @@ public class Hop {
 
   @Id
   @Column(name="hop_id")
+  @JsonProperty("id")
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long hop_id;
-  private String hop_name;
+  @JsonProperty("name")
+  @Column(name="hop_name")
+  private String hopName;
   private String hop_alias;
   private Long not_hop;
 
@@ -39,12 +42,12 @@ public class Hop {
     this.hop_id = hop_id;
   }
 
-  public String getHop_name() {
-    return hop_name;
+  public String getHopName() {
+    return hopName;
   }
 
-  public void setHop_name(String hop_name) {
-    this.hop_name = hop_name;
+  public void setHopName(String hopName) {
+    this.hopName = hopName;
   }
 
   public String getHop_alias() {
