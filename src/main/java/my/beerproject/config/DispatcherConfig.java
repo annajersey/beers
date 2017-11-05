@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-
+import java.util.Properties;
 
 
 @Configuration
@@ -71,12 +71,16 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(org.hibernate.jpa.HibernatePersistenceProvider.class);
         entityManagerFactoryBean.setPackagesToScan("my.beerproject");
+        entityManagerFactoryBean.setJpaProperties(additionalProperties());
 
-        //entityManagerFactoryBean.setJpaProperties(hibProperties());
 
         return entityManagerFactoryBean;
     }
-
+    Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.show_sql", "true");
+        return properties;
+    }
     @Bean
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();

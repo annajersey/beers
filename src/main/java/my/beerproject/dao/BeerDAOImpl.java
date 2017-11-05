@@ -62,9 +62,18 @@ public class BeerDAOImpl implements BeerDAO {
     public Beer getBeerById(int id) {
         //Session session = this.sessionFactory.getCurrentSession();
         //Beer p = (Beer) session.load(Beer.class, new Integer(id));
+        //System.out.println("qqq");
+       // Beer p=new Beer();
         Beer p = entityManager.find(Beer.class, id);
-
-        System.out.println(p.getHops());
+       // List<Beer> beerList = this.listBeers();
+       // for (Beer beer:beerList
+       //      ) {
+       //     if(beer.getBeerId()==id){
+       //          p =beer;
+       //         break;
+       //     }
+       // }
+       // System.out.println(p.getBeerToMalt());
        // System.out.println(p);
         //logger.info("Person loaded successfully, Person details="+p);
         return p;

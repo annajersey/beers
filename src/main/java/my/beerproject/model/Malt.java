@@ -3,7 +3,10 @@ package my.beerproject.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Malt {
@@ -13,6 +16,7 @@ public class Malt {
   @JsonProperty("id")
  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long maltId;
+
     @JsonProperty("name")
     @Column(name="malt_name")
   private String maltName;
@@ -45,5 +49,15 @@ public class Malt {
     this.notMalt = notMalt;
   }
 
+
+
+
+    @OneToMany(fetch = FetchType.EAGER,
+            mappedBy = "pk.malt", cascade=CascadeType.ALL)
+    private Set<BeerToMalt> beerToMalt = new HashSet<BeerToMalt>(0);
+
+    public Set<BeerToMalt> getBeerToMalt() {
+        return this.beerToMalt;
+    }
 
 }

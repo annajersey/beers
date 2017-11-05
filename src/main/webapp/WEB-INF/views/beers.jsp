@@ -57,6 +57,11 @@
 		<td>
 			<form:input path="beerSubName" />
 		</td>
+		<td>
+			<c:forEach items="${beer.getBeerToMalt()}" var="btm">
+				${btm.weight},
+			</c:forEach>p.()
+		</td>
 	</tr>
 
 	<tr>

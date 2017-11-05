@@ -20,12 +20,13 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class JsonController {
+    @Autowired
     private BeerService beerService;
-    @Autowired(required = true)
-    @Qualifier(value = "beerService")
-    public void setBeerService(BeerService ps) {
-        this.beerService = ps;
-    }
+   // @Autowired(required = true)
+   // @Qualifier(value = "beerService")
+   // public void setBeerService(BeerService ps) {
+        //this.beerService = ps;
+    //}
     @Autowired
     private HopJpa hopJpa;
     @Autowired
@@ -76,5 +77,11 @@ public class JsonController {
     public @ResponseBody List<Yeast> getAllYeasts() {
         List<Yeast> yeasts=  this.yeastJpa.findAllByOrderByYeastNameAsc();
         return yeasts;
+    }
+
+    @RequestMapping(value="beer/{beerId}", method = RequestMethod.GET)
+    public @ResponseBody Beer getBeer(@PathVariable int beerId) {
+        Beer beer=  this.beerService.getBeerById(beerId);
+        return beer;
     }
 }

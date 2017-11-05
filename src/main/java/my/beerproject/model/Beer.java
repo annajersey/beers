@@ -3,9 +3,7 @@ package my.beerproject.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Entity bean with JPA annotations
@@ -285,31 +283,57 @@ public class Beer {
             inverseJoinColumns = { @JoinColumn(name = "hop_id") })
     private List hops;
 
-    public List getMalts() {
-        return malts;
-    }
+//    public List getMalts() {
+//        return malts;
+//    }
     public StringBuilder getMaltsString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Iterator<Malt> it = this.malts.iterator(); it.hasNext(); ) {
-            sb.append(it.next().getMaltName());
+        for (Iterator<BeerToMalt> it = this.beerToMalt.iterator(); it.hasNext(); ) {
+            BeerToMalt next = it.next();
+            sb.append(next.getMalt().getMaltName());
+            sb.append(next.getWeight());
             if (it.hasNext()) {
                 sb.append(",");
             }
         }
         return sb;
+
     }
-    public void setMalts(List malts) {
-        this.malts = malts;
+//    public void setMalts(List malts) {
+//        this.malts = malts;
+//    }
+//
+//    @ManyToMany(targetEntity = Malt.class,fetch=FetchType.EAGER)
+//    @JoinTable(
+//            name="beer_to_malt",
+//            joinColumns = {@JoinColumn(name="beer_id")},
+//            inverseJoinColumns = {@JoinColumn(name="malt_id")}
+//    )
+//    private List<Malt> malts;
+@OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.beer")
+
+private Set<BeerToMalt> beerToMalt = new HashSet<BeerToMalt>(0);
+
+    public Set<BeerToMalt> getBeerToMalt() {
+        return this.beerToMalt;
     }
 
-    @ManyToMany(targetEntity = Malt.class,fetch=FetchType.EAGER)
-    @JoinTable(
-            name="beer_to_malt",
-            joinColumns = {@JoinColumn(name="beer_id")},
-            inverseJoinColumns = {@JoinColumn(name="malt_id")}
-    )
-    private List<Malt> malts;
+
+
+
+
+//    public List<BeerToMalt> getBtm() {
+//        return btm;
+//    }
+//
+//    public void setBtm(List<BeerToMalt> btm) {
+//        this.btm = btm;
+//    }
+//
+//    @OneToMany(mappedBy = "beer",fetch = FetchType.EAGER)
+//    private List<BeerToMalt> btm = new ArrayList<BeerToMalt>();
+
 
 
     @Override
