@@ -1,5 +1,8 @@
 package my.beerproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -54,6 +57,8 @@ public class Malt {
 
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "pk.malt", cascade=CascadeType.ALL)
+
+    @JsonBackReference
     private Set<BeerToMalt> beerToMalt = new HashSet<BeerToMalt>(0);
 
     public Set<BeerToMalt> getBeerToMalt() {

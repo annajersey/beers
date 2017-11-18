@@ -3,6 +3,7 @@ package my.beerproject.dao;
 
 
 import my.beerproject.model.Beer;
+import my.beerproject.model.BeerToMalt;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class BeerDAOImpl implements BeerDAO {
@@ -65,14 +67,11 @@ public class BeerDAOImpl implements BeerDAO {
         //System.out.println("qqq");
        // Beer p=new Beer();
         Beer p = entityManager.find(Beer.class, id);
-       // List<Beer> beerList = this.listBeers();
-       // for (Beer beer:beerList
-       //      ) {
-       //     if(beer.getBeerId()==id){
-       //          p =beer;
-       //         break;
-       //     }
-       // }
+
+        p.getBeerToMalt().size();
+        p.getBeerToHop().size();
+
+
        // System.out.println(p.getBeerToMalt());
        // System.out.println(p);
         //logger.info("Person loaded successfully, Person details="+p);

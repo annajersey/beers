@@ -1,5 +1,6 @@
 package my.beerproject;
 
+import my.beerproject.dao.BeerJpa;
 import my.beerproject.dao.HopJpa;
 import my.beerproject.dao.MaltJpa;
 import my.beerproject.dao.YeastJpa;
@@ -33,6 +34,8 @@ public class JsonController {
     private MaltJpa maltJpa;
     @Autowired
     private YeastJpa yeastJpa;
+    @Autowired
+    private BeerJpa beerJpa;
     @RequestMapping(value="nameorsubname/{name}", method = RequestMethod.GET)
     public @ResponseBody
     List<Beer> findByBeerNameIsOrbeerSubNameEquals(@PathVariable String name) {
@@ -82,6 +85,7 @@ public class JsonController {
     @RequestMapping(value="beer/{beerId}", method = RequestMethod.GET)
     public @ResponseBody Beer getBeer(@PathVariable int beerId) {
         Beer beer=  this.beerService.getBeerById(beerId);
+        //Beer beer = this.beerJpa.findByBeerId(beerId);
         return beer;
     }
 }

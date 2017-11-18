@@ -1,8 +1,11 @@
 package my.beerproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="hops")
@@ -64,5 +67,15 @@ public class Hop {
 
   public void setNot_hop(Long not_hop) {
     this.not_hop = not_hop;
+  }
+
+  @OneToMany(fetch = FetchType.EAGER,
+          mappedBy = "pk.hop", cascade=CascadeType.ALL)
+
+  @JsonBackReference
+  private Set<BeerToHop> beerToHop = new HashSet<BeerToHop>(0);
+
+  public Set<BeerToHop> getBeerToHop() {
+    return this.beerToHop;
   }
 }

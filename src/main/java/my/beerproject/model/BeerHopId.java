@@ -2,19 +2,16 @@ package my.beerproject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Embeddable
-public class BeerMaltId implements Serializable {
+public class BeerHopId implements Serializable {
   @JsonIgnore
   private Beer beer;
   @JsonIgnore
-  private Malt malt;
+  private Hop hop;
 
   @ManyToOne
   @JsonIgnore
@@ -28,22 +25,22 @@ public class BeerMaltId implements Serializable {
 
   @ManyToOne
   @JsonIgnore
-  public Malt getMalt() {
-    return malt;
+  public Hop getHop() {
+    return hop;
   }
 
-  public void setMalt(Malt malt) {
-    this.malt = malt;
+  public void setHop(Hop hop) {
+    this.hop = hop;
   }
 
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    BeerMaltId that = (BeerMaltId) o;
+    BeerHopId that = (BeerHopId) o;
 
     if (beer != null ? !beer.equals(that.beer) : that.beer != null) return false;
-    if (malt != null ? !malt.equals(that.malt) : that.malt != null)
+    if (hop != null ? !hop.equals(that.hop) : that.hop != null)
       return false;
 
     return true;
@@ -52,7 +49,7 @@ public class BeerMaltId implements Serializable {
   public int hashCode() {
     int result;
     result = (beer != null ? beer.hashCode() : 0);
-    result = 31 * result + (malt != null ? malt.hashCode() : 0);
+    result = 31 * result + (hop != null ? hop.hashCode() : 0);
     return result;
   }
 }

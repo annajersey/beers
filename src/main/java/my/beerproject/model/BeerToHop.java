@@ -1,36 +1,60 @@
 package my.beerproject.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
 
 @Entity
-@Table(name="beer_to_malt")
+@Table(name="beer_to_hop")
 @AssociationOverrides({
         @AssociationOverride(name = "pk.beer", joinColumns = @JoinColumn(name = "beer_id")),
-        @AssociationOverride(name = "pk.malt", joinColumns = @JoinColumn(name = "malt_id")) })
+        @AssociationOverride(name = "pk.hop", joinColumns = @JoinColumn(name = "hop_id")) })
 
-public class BeerToMalt implements Serializable {
+public class BeerToHop implements Serializable {
   @JsonIgnore
-  private BeerMaltId pk = new BeerMaltId();
-  private String weight;
+  private BeerHopId pk = new BeerHopId();
+  private Double g;
+
+  @Column(name = "g")
+  public Double getG() {
+    return g;
+  }
+
+  public void setG(Double g) {
+    this.g = g;
+  }
+  @Column(name = "add")
+  public String getAdd() {
+    return add;
+  }
+
+  public void setAdd(String add) {
+    this.add = add;
+  }
+
+  public String getAttribute() {
+    return attribute;
+  }
+
+  public void setAttribute(String attribute) {
+    this.attribute = attribute;
+  }
+
+  private String add;
+  private String attribute;
   private long order;
 
-  public BeerToMalt() {
+  public BeerToHop() {
   }
 
   @EmbeddedId
   @JsonIgnore
-  public BeerMaltId getPk() {
+  public BeerHopId getPk() {
     return pk;
   }
 
-  public void setPk(BeerMaltId pk) {
+  public void setPk(BeerHopId pk) {
     this.pk = pk;
   }
 
@@ -47,22 +71,12 @@ public class BeerToMalt implements Serializable {
 
   @Transient
 
-  public Malt getMalt() {
-    return getPk().getMalt();
+  public Hop getHop() {
+    return getPk().getHop();
   }
 
-  public void setMalt(Malt malt) {
-    getPk().setMalt(malt);
-  }
-
-
-  @Column(name = "weight", nullable = false, length = 128, updatable = false)
-  public String getWeight() {
-    return this.weight;
-  }
-
-  public void setWeight(String weight) {
-    this.weight = weight;
+  public void setHop(Hop hop) {
+    getPk().setHop(hop);
   }
 
   @Column(name = "order", nullable = false, length = 10, updatable = false)
@@ -80,7 +94,7 @@ public class BeerToMalt implements Serializable {
     if (o == null || getClass() != o.getClass())
       return false;
 
-    BeerToMalt that = (BeerToMalt) o;
+    BeerToHop that = (BeerToHop) o;
 
     if (getPk() != null ? !getPk().equals(that.getPk())
             : that.getPk() != null)
